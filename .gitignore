@@ -1,0 +1,48 @@
+## Ignore Visual Studio temporary files
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+out/
+msbuild.log
+
+## NuGet
+.nuget/
+*.nupkg
+NuGet.exe
+packages/
+
+## IDE-specific
+.idea/
+*.sln.iml
+
+## Database
+appsettings.json   
+appsettings.Development.json
+/Migrations/      
+*.db
+__MigrationHistory/
+
+## Docker
+docker-compose.*.yml
+.dockerignore
+
+## Logs
+*.log
+logs/
+
+## OS generated files
+.DS_Store
+Thumbs.db
