@@ -10,6 +10,8 @@ builder.Services.AddScoped<IFilmsService, FilmsService>();
 builder.Services.AddScoped<IFilmsRepository, FilmsRepositories>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFilmsListRepository, FilmsListRepository>();
+builder.Services.AddScoped<IFilmsListService, FilmsListService>();
 builder.Services.AddDbContext<CinemaDbContext>();
 builder.Services.AddCors(options =>
 {
