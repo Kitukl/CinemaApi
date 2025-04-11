@@ -20,9 +20,9 @@ public class FilmsListService : IFilmsListService
     await _listRepository.Add(title, userID, Films);
   }
 
-  public async Task<List<FilmsListDTO>> Get()
+  public async Task<List<FilmsListDTO>> GetForUser(Guid id)
   {
-    return await _listRepository.Get();
+    return await _listRepository.GetForUser(id);
   }
 
   public async Task<FilmsListDTO> GetById(Guid id)

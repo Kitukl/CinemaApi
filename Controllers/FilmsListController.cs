@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.IServices;
 using WebApplication2.Models;
@@ -14,21 +15,22 @@ public class FilmsListController : ControllerBase
   {
     _films = films;
   }
-
+  [Authorize]
   [HttpPost("add/list")]
   public async Task<ActionResult> Add([FromBody] FilmsListModel filmsListModel)
   {
     await _films.Add(filmsListModel.Title, filmsListModel.UserId, filmsListModel.FilmsId);
     return Ok("Дані пішли в БД");
   }
-
-  [HttpGet("lists")]
-  public async Task<ActionResult> Get()
+  [Authorize]
+  [HttpGet("list/{id}")]
+  public async Task<ActionResult> Get(Guid id)
   {
-    var filmsLists = await _films.Get();
+    var filmsLists = await _films.GetForUser(id);
     return new JsonResult(filmsLists);
   }
   
+  [Authorize]
   [HttpGet("lists/{id}")]
   public async Task<ActionResult> GetById(Guid id)
   {
@@ -36,6 +38,7 @@ public class FilmsListController : ControllerBase
     return new JsonResult(filmsList);
   }
 
+  [Authorize]
   [HttpPut("/lists/{id}")]
   public async Task<ActionResult> Change(Guid id, UpdateListModel dto)
   {
@@ -43,6 +46,7 @@ public class FilmsListController : ControllerBase
     return Ok($"Cписок з айді {id}, змінено назву на {dto.Title}");
   }
   
+  [Authorize]
   [HttpDelete("lists/{id}")]
   public async Task<ActionResult> Delete(Guid id)
   {

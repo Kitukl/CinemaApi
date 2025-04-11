@@ -22,12 +22,18 @@ public class UserRepository : IUserRepository
     await _cinema.SaveChangesAsync();
   }
 
+  public async Task<User?> GetById(Guid id)
+  {
+    return await _cinema.Users
+      .FirstOrDefaultAsync(u => u.Id == id);
+  }
+
   public async Task<User?> Get(string username)
   {
     return await _cinema.Users
       .FirstOrDefaultAsync(u => u.UserName == username);
   }
-
+  
   public Task ChangeUsername(string username, string password)
   {
     throw new NotImplementedException();

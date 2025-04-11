@@ -5,6 +5,7 @@ public interface IUserService
 {
   public Task Add(string username, string password);
   public Task<User> Get(string username);
+  public Task<User> GetById(Guid id);
   public Task ChangeUsername(string username, string password);
   public Task Delete(Guid id);
 }

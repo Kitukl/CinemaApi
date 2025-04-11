@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication2.DataBase.Entities;
 using WebApplication2.IServices;
 using WebApplication2.Models;
 
@@ -15,29 +16,12 @@ public class UserController : ControllerBase
     _userService = userService;
   }
 
-  [HttpPost("add/user")]
-  public async Task<IActionResult> Add(UserModel addFilmsListRequest)
+  [HttpGet("users/{id}")]
+  public async Task<ActionResult> GetById(Guid id)
   {
-    if (!string.IsNullOrWhiteSpace(addFilmsListRequest.Username) &&
-        !string.IsNullOrWhiteSpace(addFilmsListRequest.Password))
-    {
-      var username = addFilmsListRequest.Username;
-      var password = addFilmsListRequest.Password;
-      if (password.Length >= 8)
-      {
-        await _userService.Add(username, password);
-        return Ok();
-      }
-      else
-      {
-        return BadRequest("Password must be >= 8");
-      }
-    }
-    else
-    {
-      return BadRequest();
-    }
-  }
+    var user = await _userService.GetById(id);
+    return Ok(user);
+  } 
 
   [HttpDelete("delete/user/{id}")]
   public async Task<IActionResult> Delete(Guid id)

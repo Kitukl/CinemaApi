@@ -30,9 +30,10 @@ public class FilmsListRepository : IFilmsListRepository
     await _db.SaveChangesAsync();
   }
 
-  public async Task<List<FilmsListDTO>> Get()
+  public async Task<List<FilmsListDTO>> GetForUser(Guid id)
   {
     return await _db.FilmsLists
+      .Where(fl => fl.User.Id == id)
       .Include(fl => fl.Films)
       .Include(fl => fl.User)
       .Select(fl => new FilmsListDTO()
